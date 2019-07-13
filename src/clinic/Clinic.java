@@ -112,6 +112,9 @@ public class Clinic {
         clients[ClientNumber].getClientPet().setName("Empty");
     }
 
+    /**
+     * Меню приложения с выбором действий
+     */
     public void startMenu() {
         boolean exitFlag = false;
         while(!exitFlag) {
@@ -130,6 +133,11 @@ public class Clinic {
         }
     }
 
+    /**
+     * Метод для выбора действий через командную строку
+     * @return Флаг окончания работы программы
+     * @throws NullPointerException Исключение при выходе за пределы массива или работе с несуществующими клиентами
+     */
     private boolean checkResponse() throws NullPointerException {
         boolean exit = false;
         try {
@@ -143,12 +151,15 @@ public class Clinic {
                 case 1: {
                     System.out.println("Enter the number in base");
                     String numberInBase = scanner.nextLine();
+
                     System.out.println("Enter the Client name");
                     String clientName = scanner.nextLine();
+
                     System.out.println("Enter the type of pet");
                     System.out.println("1 - Cat");
                     System.out.println("2 - Dog");
                     String typeOfPet = scanner.nextLine();
+
                     System.out.println("Enter the Pet name");
                     String petName = scanner.nextLine();
                     if (Integer.valueOf(typeOfPet) == 1) {
@@ -163,6 +174,7 @@ public class Clinic {
                 case 2: {
                     System.out.println("Enter the number of client:");
                     int numberToSearch = Integer.parseInt(scanner.nextLine());
+
                     System.out.println("Name: " + findClientByClientNumber(numberToSearch).getClientName() +
                             "; Pet's name: " + findClientByClientNumber(numberToSearch).getClientPet().getName());
                     break;
@@ -170,6 +182,7 @@ public class Clinic {
                 case 3: {
                     System.out.println("Enter the client name:");
                     String nameToSearch = scanner.nextLine();
+
                     System.out.println("Name: " + findClientByClientName(nameToSearch).getClientName() +
                             "; Pet's name: " + findClientByClientName(nameToSearch).getClientPet().getName());
                     break;
@@ -177,6 +190,7 @@ public class Clinic {
                 case 4: {
                     System.out.println("Enter the pet name:");
                     String nameToSearch = scanner.nextLine();
+
                     System.out.println("Name: " + findClientByPetName(nameToSearch).getClientName() +
                             "; Pet's name: " + findClientByPetName(nameToSearch).getClientPet().getName());
                     break;
@@ -184,8 +198,10 @@ public class Clinic {
                 case 5: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
+
                     System.out.println("Enter the new client name");
                     String newName = scanner.nextLine();
+
                     editClientName(clientNumber, newName);
                     System.out.println("Done");
                     break;
@@ -193,8 +209,10 @@ public class Clinic {
                 case 6: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
+
                     System.out.println("Enter the new client's pet name");
                     String newName = scanner.nextLine();
+
                     editPetName(clientNumber, newName);
                     System.out.println("Done");
                     break;
@@ -202,18 +220,21 @@ public class Clinic {
                 case 7: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
+
                     deleteClient(clientNumber);
                     break;
                 }
                 case 8: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
+
                     deleteClientName(clientNumber);
                     break;
                 }
                 case 9: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
+                    
                     deleteClientPet(clientNumber);
                     break;
                 }

@@ -5,7 +5,6 @@ package clinic;
  * @since 12.07.2019
  */
 public class Cat extends Pet {
-    String typeOfPet = "Cat";
     /**
      * Конструктор
      * @param name Имя кота
