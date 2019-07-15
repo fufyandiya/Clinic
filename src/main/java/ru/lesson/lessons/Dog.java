@@ -1,4 +1,5 @@
-package clinic;
+package ru.lesson.lessons;
+
 /**
  * Класс, описывающий собаку
  * @author Ivan Kachkin

@@ -1,0 +1,87 @@
+package ru.lesson.lessons;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class ClinicTest {
+
+    @Test
+    public void addClient() {
+    }
+
+    @Test
+    public void findClientByClientNumber() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.addClient(1, new Client("Nick", new Dog("Sparky")));
+        assertEquals(clinic.clients[0], clinic.findClientByClientNumber(0));
+    }
+
+    @Test
+    public void findClientByClientName() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.addClient(1, new Client("Nick", new Dog("Sparky")));
+        assertEquals(clinic.clients[0], clinic.findClientByClientName("Brown"));
+    }
+
+    @Test
+    public void findClientByPetName() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.addClient(1, new Client("Nick", new Dog("Sparky")));
+        assertEquals(clinic.clients[1], clinic.findClientByPetName("Sparky"));
+    }
+
+    @Test
+    public void editClientName() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.editClientName(0, "Maks");
+        assertEquals("Maks", clinic.clients[0].getClientName());
+    }
+
+    @Test
+    public void editPetName() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.editPetName(0, "Snow");
+        assertEquals("Snow", clinic.clients[0].getClientPet().getName());
+    }
+
+    @Test
+    public void deleteClient() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.deleteClient(0);
+        assertEquals(null, clinic.clients[0]);
+    }
+
+    @Test
+    public void deleteClientName() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.deleteClientName(0);
+        assertEquals("Empty", clinic.clients[0].getClientName());
+    }
+
+    @Test
+    public void deleteClientPet() {
+        final Clinic clinic = new Clinic(10);
+        clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
+        clinic.deleteClientPet(0);
+        assertEquals("Empty", clinic.clients[0].getClientPet().getName());
+    }
+
+    @Test
+    public void startMenu() {
+
+    }
+
+    @Test
+    public void checkResponse() throws NullPointerException {
+
+    }
+}

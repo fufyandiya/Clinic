@@ -1,6 +1,4 @@
-package clinic;
-
-import clinic.Client;
+package ru.lesson.lessons;
 
 import java.util.Scanner;
 
@@ -13,7 +11,7 @@ public class Clinic {
     /**
      * Список клиентов
      */
-    private final Client[] clients;
+    final Client[] clients;
     Scanner scanner = new Scanner(System.in);
 
     public Clinic(final int size) {
@@ -234,7 +232,7 @@ public class Clinic {
                 case 9: {
                     System.out.println("Enter the client number");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
-                    
+
                     deleteClientPet(clientNumber);
                     break;
                 }

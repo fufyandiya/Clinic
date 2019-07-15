@@ -1,7 +1,6 @@
-import clinic.*;
+package ru.lesson.lessons;
 
 import java.util.Scanner;
-
 /**
  * Работа клиники
  * @author Ivan Kachkin

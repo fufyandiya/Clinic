@@ -1,4 +1,4 @@
-package clinic;
+package ru.lesson.lessons;
 
 /**
  * Клиент
