@@ -1,5 +1,6 @@
 package ru.lesson.lessons;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,13 +12,8 @@ public class Clinic {
     /**
      * Список клиентов
      */
-    final Client[] clients;
+    ArrayList<Client> clients = new ArrayList<Client>();
     Scanner scanner = new Scanner(System.in);
-
-    public Clinic(final int size) {
-
-        this.clients = new Client[size];
-    }
 
     /**
      * Добавить клиента
@@ -25,7 +21,7 @@ public class Clinic {
      * @param client Клиент
      */
     public void addClient(final int position, final Client client) {
-        this.clients[position] = client;
+        clients.add(position, client);
     }
 
     /**
@@ -34,8 +30,7 @@ public class Clinic {
      * @return Обьект Client из Списка клиентов clients
      */
     public Client findClientByClientNumber(int ClientNumber) {
-        Client foundClient = clients[ClientNumber];
-        return foundClient;
+        return clients.get(ClientNumber);
     }
 
     /**
@@ -45,9 +40,9 @@ public class Clinic {
      */
     public Client findClientByClientName(final String name) {
         Client foundClient = null;
-        for (int i = 0; i < clients.length; i++) {
-            if (clients[i] != null && clients[i].getClientName().equals(name)) {
-                foundClient = clients[i];
+        for (int i = 0; i < clients.size(); i++) {
+            if (clients.get(i).getClientName().equals(name)) {
+                foundClient = clients.get(i);
             }
         }
         return foundClient;
@@ -60,9 +55,9 @@ public class Clinic {
      */
     public Client findClientByPetName(final String name) {
         Client foundClient = null;
-        for (int i = 0; i < clients.length; i++) {
-            if (clients[i] != null && clients[i].getClientPet().getName().equals(name)) {
-                foundClient = clients[i];
+        for (int i = 0; i < clients.size(); i++) {
+            if (clients.get(i).getClientPet().getName().equals(name)) {
+                foundClient = clients.get(i);
             }
         }
         return foundClient;
@@ -74,7 +69,7 @@ public class Clinic {
      * @param name Новое имя
      */
     public void editClientName(int ClientNumber, String name) {
-        clients[ClientNumber].setClientName(name);
+        clients.get(ClientNumber).setClientName(name);
     }
 
     /**
@@ -83,7 +78,7 @@ public class Clinic {
      * @param name
      */
     public void editPetName(int ClientNumber, String name) {
-        clients[ClientNumber].getClientPet().setName(name);
+        clients.get(ClientNumber).getClientPet().setName(name);
     }
 
     /**
@@ -91,7 +86,7 @@ public class Clinic {
      * @param ClientNumber номер клиента в базе
      */
     public void deleteClient(int ClientNumber) {
-        clients[ClientNumber] = null;
+        clients.remove(ClientNumber);
     }
 
     /**
@@ -99,7 +94,7 @@ public class Clinic {
      * @param ClientNumber номер клиента в базе
      */
     public void deleteClientName(int ClientNumber) {
-        clients[ClientNumber].setClientName("Empty");
+        clients.get(ClientNumber).setClientName("Нет имени");
     }
 
     /**
@@ -107,7 +102,7 @@ public class Clinic {
      * @param ClientNumber номер клиента в базе
      */
     public void deleteClientPet(int ClientNumber) {
-        clients[ClientNumber].getClientPet().setName("Empty");
+        clients.get(ClientNumber).getClientPet().setName("Нет имени");
     }
 
     /**
@@ -116,17 +111,17 @@ public class Clinic {
     public void startMenu() {
         boolean exitFlag = false;
         while(!exitFlag) {
-            System.out.println("1 - Add client");
-            System.out.println("2 - Find client by client number");
-            System.out.println("3 - Find client by client name");
-            System.out.println("4 - Find client by client's pet name");
-            System.out.println("5 - Edit client name");
-            System.out.println("6 - Edit client's pet name");
-            System.out.println("7 - Delete client");
-            System.out.println("8 - Delete client's name");
-            System.out.println("9 - Delete client's pet name");
-            System.out.println("10 - Show all clients");
-            System.out.println("0 - Exit");
+            System.out.println("1 - Добавить клиента");
+            System.out.println("2 - Найти клиента по номеру клиента");
+            System.out.println("3 - Найти клиента по имени клиента");
+            System.out.println("4 - Найти клиента по кличке питомца");
+            System.out.println("5 - Изменить имя клиента");
+            System.out.println("6 - Изменить кличку питомца клиента");
+            System.out.println("7 - Удалить клиента из базы");
+            System.out.println("8 - Удалить имя клиента");
+            System.out.println("9 - Удалить кличку питомца клиента");
+            System.out.println("10 - Вывести всех клиентов");
+            System.out.println("0 - Выход");
             exitFlag = checkResponse();
         }
     }
@@ -147,110 +142,107 @@ public class Clinic {
                     break;
                 }
                 case 1: {
-                    System.out.println("Enter the number in base");
-                    String numberInBase = scanner.nextLine();
-
-                    System.out.println("Enter the Client name");
+                    System.out.println("Введите имя клиента");
                     String clientName = scanner.nextLine();
 
-                    System.out.println("Enter the type of pet");
-                    System.out.println("1 - Cat");
-                    System.out.println("2 - Dog");
+                    System.out.println("Введите тип питомца");
+                    System.out.println("1 - Кошка");
+                    System.out.println("2 - Собака");
                     String typeOfPet = scanner.nextLine();
 
-                    System.out.println("Enter the Pet name");
+                    System.out.println("Введите кличку питомца");
                     String petName = scanner.nextLine();
                     if (Integer.valueOf(typeOfPet) == 1) {
-                        clients[Integer.valueOf(numberInBase)] = new Client(clientName, new Cat(petName));
+                        clients.add(new Client(clientName, new Cat(petName)));
                     } else if (Integer.valueOf(typeOfPet) == 2) {
-                        clients[Integer.valueOf(numberInBase)] = new Client(clientName, new Dog(petName));
+                        clients.add(new Client(clientName, new Dog(petName)));
                     } else {
-                        System.out.println("Wrong typeOfPet!");
+                        System.out.println("Неправильный тип питомца!");
                     }
                     break;
                 }
                 case 2: {
-                    System.out.println("Enter the number of client:");
+                    System.out.println("Введите номер клиента:");
                     int numberToSearch = Integer.parseInt(scanner.nextLine());
 
-                    System.out.println("Name: " + findClientByClientNumber(numberToSearch).getClientName() +
-                            "; Pet's name: " + findClientByClientNumber(numberToSearch).getClientPet().getName());
+                    System.out.println("Имя: " + findClientByClientNumber(numberToSearch).getClientName() +
+                            "; Кличка питомца: " + findClientByClientNumber(numberToSearch).getClientPet().getName());
                     break;
                 }
                 case 3: {
-                    System.out.println("Enter the client name:");
+                    System.out.println("Введите имя клиента:");
                     String nameToSearch = scanner.nextLine();
 
-                    System.out.println("Name: " + findClientByClientName(nameToSearch).getClientName() +
-                            "; Pet's name: " + findClientByClientName(nameToSearch).getClientPet().getName());
+                    System.out.println("Имя: " + findClientByClientName(nameToSearch).getClientName() +
+                            "; Кличка питомца: " + findClientByClientName(nameToSearch).getClientPet().getName());
                     break;
                 }
                 case 4: {
-                    System.out.println("Enter the pet name:");
+                    System.out.println("Введите кличку питомца:");
                     String nameToSearch = scanner.nextLine();
 
-                    System.out.println("Name: " + findClientByPetName(nameToSearch).getClientName() +
-                            "; Pet's name: " + findClientByPetName(nameToSearch).getClientPet().getName());
+                    System.out.println("Имя: " + findClientByPetName(nameToSearch).getClientName() +
+                            "; Кличка питомца: " + findClientByPetName(nameToSearch).getClientPet().getName());
                     break;
                 }
                 case 5: {
-                    System.out.println("Enter the client number");
+                    System.out.println("Введите номер клиента");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
 
-                    System.out.println("Enter the new client name");
+                    System.out.println("Введите новое имя клиента");
                     String newName = scanner.nextLine();
 
                     editClientName(clientNumber, newName);
-                    System.out.println("Done");
+                    System.out.println("Выполнено");
                     break;
                 }
                 case 6: {
-                    System.out.println("Enter the client number");
+                    System.out.println("Введите номер клиента");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
 
-                    System.out.println("Enter the new client's pet name");
+                    System.out.println("Введите новую кличку питомца");
                     String newName = scanner.nextLine();
 
                     editPetName(clientNumber, newName);
-                    System.out.println("Done");
+                    System.out.println("Выполнено");
                     break;
                 }
                 case 7: {
-                    System.out.println("Enter the client number");
+                    System.out.println("Введите номер клиента");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
 
                     deleteClient(clientNumber);
                     break;
                 }
                 case 8: {
-                    System.out.println("Enter the client number");
+                    System.out.println("Введите номер клиента");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
 
                     deleteClientName(clientNumber);
                     break;
                 }
                 case 9: {
-                    System.out.println("Enter the client number");
+                    System.out.println("Введите номер клиента");
                     int clientNumber = Integer.parseInt(scanner.nextLine());
 
                     deleteClientPet(clientNumber);
                     break;
                 }
                 case 10: {
-                    for (int i = 0; i < clients.length; i++) {
-                        if (clients[i] != null) {
-                            System.out.println("Number: " + i +
-                                    "; Name: " + clients[i].getClientName() +
-                                    "; Pet's name: " + clients[i].getClientPet().getName());
+                    for (int i = 0; i < clients.size(); i++) {
+                        if (clients.get(i) != null) {
+                            System.out.println("Номер: " + i +
+                                    "; Имя: " + clients.get(i).getClientName() +
+                                    "; Кличка питомца: " + clients.get(i).getClientPet().getName());
                         }
                     }
                     break;
                 }
             }
         } catch (NullPointerException ex) {
-            System.out.println("Wrong information!");
+            System.out.println("Неверная информация!");
         } finally {
-            System.out.println("Enter to continue");
+            System.out.println("Нажмите для продолжения");
             scanner.nextLine();
             return exit;
         }

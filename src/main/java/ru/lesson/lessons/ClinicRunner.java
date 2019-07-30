@@ -13,7 +13,7 @@ public class ClinicRunner {
     }
 
     public void go() {
-        final Clinic clinic = new Clinic(10);
+        final Clinic clinic = new Clinic();
 
         clinic.addClient(0, new Client("Brown", new Cat("Diggy")));
 
